@@ -1,715 +1,714 @@
 {
-"dashboard" :
-{
-  "id": 2,
-  "title": "Beekeeper Hive Dashboard - %STACKNAME%",
-  "tags": [],
-  "style": "dark",
-  "timezone": "browser",
-  "editable": true,
-  "sharedCrosshair": false,
-  "hideControls": false,
-  "time": {
-    "from": "now-3h",
-    "to": "now"
-  },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
-  },
-  "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {
-          "tags": [],
-          "text": "worker",
-          "value": "worker"
-        },
-        "hide": 0,
-        "includeAll": false,
-        "label": "Role",
-        "multi": false,
-        "name": "Role",
-        "options": [
-          {
-            "selected": false,
-            "text": "queen",
-            "value": "queen"
-          },
-          {
-            "selected": true,
+  "dashboard": {
+    "id": 2,
+    "title": "Beekeeper Hive Dashboard - %STACKNAME%",
+    "tags": [],
+    "style": "dark",
+    "timezone": "browser",
+    "editable": true,
+    "sharedCrosshair": false,
+    "hideControls": false,
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "tags": [],
             "text": "worker",
             "value": "worker"
           },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Role",
+          "multi": false,
+          "name": "Role",
+          "options": [
+            {
+              "selected": false,
+              "text": "queen",
+              "value": "queen"
+            },
+            {
+              "selected": true,
+              "text": "worker",
+              "value": "worker"
+            },
+            {
+              "selected": false,
+              "text": "drone",
+              "value": "drone"
+            }
+          ],
+          "query": "queen,worker,drone",
+          "type": "custom"
+        },
+        {
+          "allValue": null,
+          "current": {
+            "value": [
+              "$__all"
+            ],
+            "text": "All"
+          },
+          "datasource": "%STACKNAME%",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Instance",
+          "multi": true,
+          "name": "Instance",
+          "options": [],
+          "query": "ec2_instance_attribute(%REGION%, InstanceId, { \"tag:StackName\": [ \"%STACKNAME%\" ], \"tag:StackRole\":[\"$Role\"],\"instance-state-code\":[\"16\"]})",
+          "refresh": 1,
+          "regex": "",
+          "sort": 0,
+          "tagValuesQuery": null,
+          "tagsQuery": null,
+          "type": "query"
+        }
+      ]
+    },
+    "annotations": {
+      "list": []
+    },
+    "refresh": false,
+    "schemaVersion": 13,
+    "version": 10,
+    "links": [],
+    "gnetId": null,
+    "rows": [
+      {
+        "title": "Dashboard Row",
+        "panels": [
           {
-            "selected": false,
-            "text": "drone",
-            "value": "drone"
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "id": 5,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": true,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 12,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "CPU%",
+                "dimensions": {
+                  "InstanceId": "$Instance"
+                },
+                "metricName": "CPUUtilization",
+                "namespace": "AWS/EC2",
+                "period": "",
+                "refId": "A",
+                "region": "%REGION%",
+                "statistics": [
+                  "Average"
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 90
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "EC2 Average CPU %",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": "Percentage CPU",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
           }
         ],
-        "query": "queen,worker,drone",
-        "type": "custom"
+        "showTitle": false,
+        "titleSize": "h6",
+        "height": 250,
+        "repeat": null,
+        "repeatRowId": null,
+        "repeatIteration": null,
+        "collapse": false
       },
       {
-        "allValue": null,
-        "current": {
-          "value": [
-            "$__all"
-          ],
-          "text": "All"
-        },
-        "datasource": "%STACKNAME%",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Instance",
-        "multi": true,
-        "name": "Instance",
-        "options": [],
-        "query": "ec2_instance_attribute(%REGION%, InstanceId, { \"tag:StackName\": [ \"%STACKNAME%\" ], \"tag:StackRole\":[\"$Role\"],\"instance-state-code\":[\"16\"]})",
-        "refresh": 1,
-        "regex": "",
-        "sort": 0,
-        "tagValuesQuery": null,
-        "tagsQuery": null,
-        "type": "query"
+        "title": "Dashboard Row",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "id": 6,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 12,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Inbound",
+                "dimensions": {
+                  "InstanceId": "$Instance"
+                },
+                "metricName": "NetworkIn",
+                "namespace": "AWS/EC2",
+                "period": "",
+                "refId": "A",
+                "region": "%REGION%",
+                "statistics": [
+                  "Average"
+                ]
+              },
+              {
+                "alias": "Outbound",
+                "dimensions": {
+                  "InstanceId": "$Instance"
+                },
+                "metricName": "NetworkOut",
+                "namespace": "AWS/EC2",
+                "period": "",
+                "refId": "B",
+                "region": "%REGION%",
+                "statistics": [
+                  "Average"
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Network Throughput",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "showTitle": false,
+        "titleSize": "h6",
+        "height": 250,
+        "repeat": null,
+        "repeatRowId": null,
+        "repeatIteration": null,
+        "collapse": false
+      },
+      {
+        "title": "Dashboard Row",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "id": 2,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Permitted",
+                "dimensions": {
+                  "FileSystemId": "%FSID%"
+                },
+                "metricName": "PermittedThroughput",
+                "namespace": "AWS/EFS",
+                "period": "",
+                "refId": "A",
+                "region": "%REGION%",
+                "statistics": [
+                  "Sum"
+                ]
+              },
+              {
+                "alias": "Used",
+                "dimensions": {
+                  "FileSystemId": "%FSID%"
+                },
+                "metricName": "TotalIOBytes",
+                "namespace": "AWS/EFS",
+                "period": "",
+                "refId": "B",
+                "region": "%REGION%",
+                "statistics": [
+                  "Sum"
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "EFS Throughput Utilization",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": "Bytes/Sec",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "id": 1,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Credits",
+                "dimensions": {
+                  "FileSystemId": "%FSID%"
+                },
+                "metricName": "BurstCreditBalance",
+                "namespace": "AWS/EFS",
+                "period": "",
+                "refId": "A",
+                "region": "%REGION%",
+                "statistics": [
+                  "Average"
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "EFS Burst Credit Balance",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "showTitle": false,
+        "titleSize": "h6",
+        "height": "250px",
+        "repeat": null,
+        "repeatRowId": null,
+        "repeatIteration": null,
+        "collapse": false
+      },
+      {
+        "title": "Dashboard Row",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "id": 3,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Read",
+                "dimensions": {
+                  "FileSystemId": "%FSID%"
+                },
+                "metricName": "DataReadIOBytes",
+                "namespace": "AWS/EFS",
+                "period": "",
+                "refId": "B",
+                "region": "%REGION%",
+                "statistics": [
+                  "Sum"
+                ]
+              },
+              {
+                "alias": "Write",
+                "dimensions": {
+                  "FileSystemId": "%FSID%"
+                },
+                "metricName": "DataWriteIOBytes",
+                "namespace": "AWS/EFS",
+                "period": "",
+                "refId": "C",
+                "region": "%REGION%",
+                "statistics": [
+                  "Sum"
+                ]
+              },
+              {
+                "alias": "Metadata",
+                "dimensions": {
+                  "FileSystemId": "%FSID%"
+                },
+                "metricName": "MetadataIOBytes",
+                "namespace": "AWS/EFS",
+                "period": "",
+                "refId": "D",
+                "region": "%REGION%",
+                "statistics": [
+                  "Sum"
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "EFS IO Type",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": "Bytes/Sec",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "id": 4,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Connections",
+                "dimensions": {
+                  "FileSystemId": "%FSID%"
+                },
+                "metricName": "ClientConnections",
+                "namespace": "AWS/EFS",
+                "period": "",
+                "refId": "A",
+                "region": "%REGION%",
+                "statistics": [
+                  "Sum"
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "EFS Client Connections",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": "Count",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "showTitle": false,
+        "titleSize": "h6",
+        "height": 250,
+        "repeat": null,
+        "repeatRowId": null,
+        "repeatIteration": null,
+        "collapse": false
       }
     ]
-  },
-  "annotations": {
-    "list": []
-  },
-  "refresh": false,
-  "schemaVersion": 13,
-  "version": 10,
-  "links": [],
-  "gnetId": null,
-  "rows": [
-    {
-      "title": "Dashboard Row",
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "id": 5,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": true,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "CPU%",
-              "dimensions": {
-                "InstanceId": "$Instance"
-              },
-              "metricName": "CPUUtilization",
-              "namespace": "AWS/EC2",
-              "period": "",
-              "refId": "A",
-              "region": "%REGION%",
-              "statistics": [
-                "Average"
-              ]
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "gt",
-              "value": 90
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "EC2 Average CPU %",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "Percentage CPU",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": 250,
-      "repeat": null,
-      "repeatRowId": null,
-      "repeatIteration": null,
-      "collapse": false
-    },
-    {
-      "title": "Dashboard Row",
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "id": 6,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 12,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "Inbound",
-              "dimensions": {
-                "InstanceId": "$Instance"
-              },
-              "metricName": "NetworkIn",
-              "namespace": "AWS/EC2",
-              "period": "",
-              "refId": "A",
-              "region": "%REGION%",
-              "statistics": [
-                "Average"
-              ]
-            },
-            {
-              "alias": "Outbound",
-              "dimensions": {
-                "InstanceId": "$Instance"
-              },
-              "metricName": "NetworkOut",
-              "namespace": "AWS/EC2",
-              "period": "",
-              "refId": "B",
-              "region": "%REGION%",
-              "statistics": [
-                "Average"
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Network Throughput",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": 250,
-      "repeat": null,
-      "repeatRowId": null,
-      "repeatIteration": null,
-      "collapse": false
-    },
-    {
-      "title": "Dashboard Row",
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "id": 2,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "Permitted",
-              "dimensions": {
-                "FileSystemId": "%FSID%"
-              },
-              "metricName": "PermittedThroughput",
-              "namespace": "AWS/EFS",
-              "period": "",
-              "refId": "A",
-              "region": "%REGION%",
-              "statistics": [
-                "Sum"
-              ]
-            },
-            {
-              "alias": "Used",
-              "dimensions": {
-                "FileSystemId": "%FSID%"
-              },
-              "metricName": "TotalIOBytes",
-              "namespace": "AWS/EFS",
-              "period": "",
-              "refId": "B",
-              "region": "%REGION%",
-              "statistics": [
-                "Sum"
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "EFS Throughput Utilization",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "Bytes/Sec",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "id": 1,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "Credits",
-              "dimensions": {
-                "FileSystemId": "%FSID%"
-              },
-              "metricName": "BurstCreditBalance",
-              "namespace": "AWS/EFS",
-              "period": "",
-              "refId": "A",
-              "region": "%REGION%",
-              "statistics": [
-                "Average"
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "EFS Burst Credit Balance",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": "250px",
-      "repeat": null,
-      "repeatRowId": null,
-      "repeatIteration": null,
-      "collapse": false
-    },
-    {
-      "title": "Dashboard Row",
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "id": 3,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "Read",
-              "dimensions": {
-                "FileSystemId": "%FSID%"
-              },
-              "metricName": "DataReadIOBytes",
-              "namespace": "AWS/EFS",
-              "period": "",
-              "refId": "B",
-              "region": "%REGION%",
-              "statistics": [
-                "Sum"
-              ]
-            },
-            {
-              "alias": "Write",
-              "dimensions": {
-                "FileSystemId": "%FSID%"
-              },
-              "metricName": "DataWriteIOBytes",
-              "namespace": "AWS/EFS",
-              "period": "",
-              "refId": "C",
-              "region": "%REGION%",
-              "statistics": [
-                "Sum"
-              ]
-            },
-            {
-              "alias": "Metadata",
-              "dimensions": {
-                "FileSystemId": "%FSID%"
-              },
-              "metricName": "MetadataIOBytes",
-              "namespace": "AWS/EFS",
-              "period": "",
-              "refId": "D",
-              "region": "%REGION%",
-              "statistics": [
-                "Sum"
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "EFS IO Type",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "Bytes/Sec",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "id": 4,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "Connections",
-              "dimensions": {
-                "FileSystemId": "%FSID%"
-              },
-              "metricName": "ClientConnections",
-              "namespace": "AWS/EFS",
-              "period": "",
-              "refId": "A",
-              "region": "%REGION%",
-              "statistics": [
-                "Sum"
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "EFS Client Connections",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "Count",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "showTitle": false,
-      "titleSize": "h6",
-      "height": 250,
-      "repeat": null,
-      "repeatRowId": null,
-      "repeatIteration": null,
-      "collapse": false
-    }
-  ]
-}
+  }
 }
