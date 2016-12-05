@@ -1,6 +1,6 @@
 {
   "dashboard": {
-    "id": 2,
+    "id": null,
     "title": "Beekeeper Hive Dashboard - %STACKNAME%",
     "tags": [],
     "style": "dark",
@@ -710,5 +710,6 @@
         "collapse": false
       }
     ]
-  }
+  },
+  "overwrite": true
 }
